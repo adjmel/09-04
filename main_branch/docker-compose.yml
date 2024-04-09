@@ -1,0 +1,8 @@
+version: '3.8' #Docker Compose syntax version
+
+
+services: # Definition of services to run
+  web: # Service name
+    build: . # Build the image from the Dockerfile in the current directory
+    ports: # Configuration of ports to expose
+      - "8000:8000" # Forward port 3000 from the container to port 3000 on the host

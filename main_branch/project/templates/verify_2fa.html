@@ -1,0 +1,29 @@
+<!-- Create an HTML template (verify_2fa.html) to display the 2FA 
+verification form. This template should include a field for 
+users to enter their 2FA code, as well as a list of their 
+registered 2FA devices for management. -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Verify Two-Factor Authentication (2FA)</h2>
+  <p>Enter the verification code from your authentication app:</p>
+
+  <form method="post">
+    {% csrf_token %}
+    <label for="verification_code">Verification Code:</label>
+    <input type="text" id="verification_code" name="verification_code" required>
+    <button type="submit" class="btn btn-primary">Verify</button>
+  </form>
+
+  <h3>Registered 2FA Devices:</h3>
+  <ul>
+    {% for device in devices %}
+      <li>{{ device.name }}</li>
+    {% empty %}
+      <li>No 2FA devices registered.</li>
+    {% endfor %}
+  </ul>
+  
+  <a href="{% url 'enable_2fa' %}">Enable 2FA on another device</a>
+{% endblock %}

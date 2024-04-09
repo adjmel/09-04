@@ -1,0 +1,27 @@
+<!-- créez un modèle HTML ( enable_2fa.html) pour afficher le 
+formulaire de configuration 2FA. Ce modèle doit inclure des 
+champs permettant aux utilisateurs de configurer 2FA, comme 
+scanner un code QR ou saisir un code de vérification à partir 
+de leur application d'authentification. -->
+
+{% extends "base.html" %}
+
+{% block content %}
+
+
+<h2>Login Successful</h2>
+<p>Scan the QR code below to complete the login process:</p>
+
+<img src="{{ qr_code_url }}" alt="QR Code">
+
+  <h2>Enable Two-Factor Authentication (2FA)</h2>
+  <p>Follow these steps to enable 2FA for your account:</p>
+
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Enable 2FA</button>
+  </form>
+  
+  <a href="{% url 'verify_2fa' %}">Already enabled 2FA? Verify it here.</a>
+{% endblock %}
